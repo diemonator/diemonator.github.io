@@ -1,0 +1,33 @@
+name: Extract Build Number
+
+description: Extracts the build number from a Git tag (vX.Y.Z format)
+
+inputs:
+  tag:
+    description: "Git tag reference"
+    required: true
+  shell-type:
+    description: The shell type to use
+    required: true
+
+outputs:
+  build_number:
+    description: "Extracted build number"
+    value: ${{ steps.extract.outputs.BUILD_NUMBER }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Extract build number
+      id: extract
+      shell: ${{ inputs.shell-type }}
+      run: |
+        TAG="${{ inputs.tag }}"
+        if [[ "$TAG" =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+          BUILD_NUMBER="${BASH_REMATCH[1]}.${BASH_REMATCH[2]}.${BASH_REMATCH[3]}"
+          echo "BUILD_NUMBER=$BUILD_NUMBER" >> $GITHUB_ENV
+          echo "BUILD_NUMBER=$BUILD_NUMBER" >> $GITHUB_OUTPUT
+        else
+          echo "Invalid tag format: $TAG"
+          exit 1
+        fi

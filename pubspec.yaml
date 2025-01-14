@@ -1,0 +1,56 @@
+name: portfolio
+description: "A new Flutter project."
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_localizations:
+    sdk: flutter
+
+  flutter_web_plugins:
+    sdk: flutter
+
+  cupertino_icons: any
+  flutter_adaptive_scaffold: any
+  go_router: any
+  get_it: any
+  flutter_bloc: any
+  equatable: any
+  gap: any
+  flutter_svg: any
+  flutter_staggered_animations: any
+  url_launcher: any
+  shared_preferences: any
+  result_dart: any
+  intl: any
+  freezed_annotation: any
+  json_annotation: any
+  collection: any
+  firebase_core: any
+  firebase_analytics: any
+  firebase_crashlytics: any
+  firebase_remote_config: any
+  firebase_performance: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: any
+  build_runner: any
+  freezed: any
+  json_serializable: any
+
+flutter:
+  generate: true
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/svgs/

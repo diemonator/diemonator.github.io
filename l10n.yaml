@@ -1,0 +1,8 @@
+synthetic-package: false
+
+output-class: AppLocalizations
+arb-dir: lib/core/localization
+output-dir: lib/core/localization/generated
+template-arb-file: app_en.arb
+output-localization-file: app_localizations.dart
+untranslated-messages-file: missing_translations.txt
