@@ -1,0 +1,29 @@
+name: Configure FlutterFire
+
+description: Configure FlutterFire for the specified platforms.
+
+inputs:
+  platforms:
+    description: Platforms to configure (e.g., android, web)
+    required: true
+  firebase-token:
+    description: Firebase token for authentication
+    required: true
+  firebase-project-id:
+    description: Firebase project ID
+    required: true
+  shell-type:
+    description: The shell type to use
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Configure FlutterFire
+      run: |
+        flutterfire configure \
+        --token=${{ inputs.firebase-token }} \
+        --project=${{ inputs.firebase-project-id }} \
+        --platforms=${{ inputs.platforms }} \
+        --yes
+      shell: ${{ inputs.shell-type }}

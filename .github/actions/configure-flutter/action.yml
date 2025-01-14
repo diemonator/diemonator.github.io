@@ -1,0 +1,28 @@
+name: Setup Flutter
+
+description: Setup Flutter.
+
+inputs:
+  flutter-version:
+    description: Flutter version to use
+    required: true
+  shell-type:
+    description: The shell type to use
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Flutter SDK
+      uses: flutter-actions/setup-flutter@v4
+      with:
+        channel: stable
+        version: ${{ inputs.flutter-version }}
+
+    - name: Install Flutter Dependencies
+      run: flutter pub get
+      shell: ${{ inputs.shell-type }}
+
+    - name: Set up FlutterFire CLI
+      run: dart pub global activate flutterfire_cli
+      shell: ${{ inputs.shell-type }}

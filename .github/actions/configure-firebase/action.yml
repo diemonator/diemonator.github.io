@@ -1,0 +1,23 @@
+name: Configure Firebase
+
+description: Configure Firebase
+
+inputs:
+  node-version:
+    description: Node.js version to use
+    required: true
+  shell-type:
+    description: The shell type to use
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Install Firebase CLI
+      run: npm install firebase-tools -g
+      shell: ${{ inputs.shell-type }}
