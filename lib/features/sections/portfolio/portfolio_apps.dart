@@ -8,7 +8,7 @@ class PortfolioApp {
   final String gitHubLink;
 }
 
-final dic = {
+final portfolioTechnologies = {
   AppRoutes.flutter: [
     const PortfolioApp(
       'Imgur',

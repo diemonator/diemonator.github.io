@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/constants/app_assets.dart';
+import '../../core/extensions/media_query_extensions.dart';
 import 'widgets/bottom_bar.dart';
 import 'widgets/header.dart';
 import 'widgets/navbar.dart';
@@ -15,7 +16,7 @@ class MainView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isSmall = MediaQuery.sizeOf(context).width < 600;
+    final isSmall = context.isScreenSmall;
 
     return Scaffold(
       appBar: isSmall

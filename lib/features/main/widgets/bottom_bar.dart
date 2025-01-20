@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/extensions/media_query_extensions.dart';
 import '../../../core/navigation/app_routes.dart';
 import 'footer.dart';
 
@@ -15,8 +16,8 @@ class BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.sizeOf(context).width;
-    if (screenWidth > 600) {
+    final isScreenSmall = context.isScreenSmall;
+    if (!isScreenSmall) {
       return const Footer();
     }
 

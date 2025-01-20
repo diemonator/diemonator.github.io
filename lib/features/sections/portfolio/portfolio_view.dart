@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/extensions/media_query_extensions.dart';
 import '../../../core/navigation/app_routes.dart';
 
 class PortfolioView extends StatelessWidget {
@@ -11,52 +12,48 @@ class PortfolioView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final columCount = MediaQuery.sizeOf(context).width > 800 ? 2 : 1;
+    final columCount = !context.isScreenMedium ? 2 : 1;
 
     return AnimationLimiter(
-      child: GridView.count(
-        crossAxisCount: columCount,
-        childAspectRatio: 2,
-        children: List.generate(
-          AppRoutes.portfolio.children.length,
-          (index) {
-            final item = AppRoutes.portfolio.children[index];
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: columCount,
+          childAspectRatio: 2,
+        ),
+        itemCount: AppRoutes.portfolio.children.length,
+        itemBuilder: (context, index) {
+          final item = AppRoutes.portfolio.children[index];
 
-            return AnimationConfiguration.staggeredGrid(
-              columnCount: columCount,
-              position: index,
-              child: FadeInAnimation(
-                child: ScaleAnimation(
-                  child: _FrameworkBadge(
-                    item.name,
-                    item.assetPath,
-                    item.title,
-                  ),
+          return AnimationConfiguration.staggeredGrid(
+            columnCount: columCount,
+            position: index,
+            child: FadeInAnimation(
+              child: ScaleAnimation(
+                child: _FrameworkBadge(
+                  item.name,
+                  item.assetPath,
+                  item.title,
                 ),
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
 }
 
 class _FrameworkBadge extends StatelessWidget {
-  const _FrameworkBadge(
-    this.name,
-    this.imagePath,
-    this.label,
-  );
+  const _FrameworkBadge(this._name, this._imagePath, this._label);
 
-  final String name;
-  final String imagePath;
-  final String label;
+  final String _name;
+  final String _imagePath;
+  final String _label;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.goNamed(name),
+      onTap: () => context.goNamed(_name),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -64,12 +61,12 @@ class _FrameworkBadge extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).focusColor,
             ),
-            child: SvgPicture.asset(imagePath, width: 100, height: 100),
+            child: SvgPicture.asset(_imagePath, width: 100, height: 100),
           ),
           const Gap(16),
-          SelectableText(label),
+          SelectableText(_label),
         ],
       ),
     );

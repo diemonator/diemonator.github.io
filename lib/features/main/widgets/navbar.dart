@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/extensions/media_query_extensions.dart';
 import '../../../core/navigation/app_routes.dart';
 
 class Navbar extends StatelessWidget {
@@ -14,10 +15,9 @@ class Navbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.sizeOf(context).width;
     final navRailItems = AppRoutes.navRailItems;
 
-    if (screenWidth < 600) {
+    if (context.isScreenSmall) {
       return const SizedBox.shrink();
     }
 

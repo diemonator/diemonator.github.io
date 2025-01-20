@@ -5,13 +5,15 @@ import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../core/constants/app_assets.dart';
 import '../../../core/constants/url_links.dart';
+import '../../../core/extensions/media_query_extensions.dart';
 
 class ContactsView extends StatelessWidget {
   const ContactsView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.sizeOf(context).width < 800;
+    final isMobile = context.isScreenMedium;
+    final primaryColor = Theme.of(context).colorScheme.onSurface;
 
     final title = Center(
       child: Column(
@@ -39,11 +41,7 @@ class ContactsView extends StatelessWidget {
       children: [
         DecoratedBox(
           decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ),
+            border: Border(bottom: BorderSide(color: primaryColor)),
           ),
           child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,6 +94,10 @@ class ContactsView extends StatelessWidget {
               onTap: () => launchUrlString(UrlLinks.linkedIn),
               child: SvgPicture.asset(
                 AppAssets.linkedin,
+                colorFilter: ColorFilter.mode(
+                  primaryColor,
+                  BlendMode.srcIn,
+                ),
                 height: 24,
                 width: 24,
               ),
@@ -104,6 +106,10 @@ class ContactsView extends StatelessWidget {
               onTap: () => launchUrlString(UrlLinks.github),
               child: SvgPicture.asset(
                 AppAssets.github,
+                colorFilter: ColorFilter.mode(
+                  primaryColor,
+                  BlendMode.srcIn,
+                ),
                 height: 24,
                 width: 24,
               ),
