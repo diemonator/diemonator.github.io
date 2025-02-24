@@ -45,8 +45,8 @@ Welcome to my personal portfolio website! This site showcases my skills, project
 ## Contact
 
 Feel free to connect with me:
-- **Email**: [your-email@example.com](mailto:emilkaramiihov@gmail.com)
-- **LinkedIn**: [Your LinkedIn Profile](https://www.linkedin.com/in/emil-karamihov-b47a66160)
+- **Email**: [emilkaramiihov@gmail.com](mailto:emilkaramiihov@gmail.com)
+- **LinkedIn**: [https://www.linkedin.com/in/emil-karamihov-b47a66160](https://www.linkedin.com/in/emil-karamihov-b47a66160)
 
 ---
 
