@@ -1,0 +1,162 @@
+name: Flutter Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  flutter-web-build:
+    name: Build Flutter App for Web
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: ./.github/actions/configure-flutter
+        with:
+          flutter-version: latest
+          shell-type: bash
+
+      - name: Configure Firebase
+        uses: ./.github/actions/configure-firebase
+        with:
+          node-version: ${{ matrix.node }}
+          firebase-version: ${{ vars.FIREBASE_VERSION }}
+          shell-type: bash
+
+      - name: Configure FlutterFire for Web
+        uses: ./.github/actions/configure-flutterfire
+        with:
+          platforms: web
+          firebase-token: ${{ secrets.FIREBASE_TOKEN }}
+          firebase-project-id: ${{ secrets.FIREBASE_PROJECT_ID }}
+          shell-type: bash
+
+      - name: Build Code with build_runner
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Build Flutter Web
+        run: |
+          flutter build web --wasm \
+          --build-number=$GITHUB_RUN_NUMBER \
+          --dart-define=BUILD_VERSION=${{ steps.build_number.outputs.build_number }}
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: flutter-web-build
+          path: build/web
+  
+  flutter-android:
+    name: Build & Deploy Flutter App for Android
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Create key.properties
+        run: |
+          echo "storePassword=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}" > android/key.properties
+          echo "keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}" >> android/key.properties
+          echo "keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}" >> android/key.properties
+          echo "storeFile=upload-keystore.jks" >> android/key.properties
+
+      - name: Decode and Restore Keystore
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > android/app/upload-keystore.jks
+
+      - name: Setup Flutter
+        uses: ./.github/actions/configure-flutter
+        with:
+          flutter-version: latest
+          shell-type: bash
+
+      - name: Configure Firebase
+        uses: ./.github/actions/configure-firebase
+        with:
+          node-version: ${{ matrix.node }}
+          firebase-version: ${{ vars.FIREBASE_VERSION }}
+          shell-type: bash
+
+      - name: Configure FlutterFire for Android
+        uses: ./.github/actions/configure-flutterfire
+        with:
+          platforms: android
+          firebase-token: ${{ secrets.FIREBASE_TOKEN }}
+          firebase-project-id: ${{ secrets.FIREBASE_PROJECT_ID }}
+          shell-type: bash
+
+      - name: Build Code with build_runner
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Build Android APK
+        run: | 
+          flutter build apk \
+          --flavor ${{ vars.FLAVOR }} \
+          --build-number=$GITHUB_RUN_NUMBER \
+          --dart-define=BUILD_VERSION=${{ steps.build_number.outputs.build_number }}
+
+      - name: Upload Build Android APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: flutter-android-build
+          path: build/app/outputs/flutter-apk/app-${{ vars.FLAVOR }}-release.apk
+
+#  flutter-ios:
+#    name: Build & Deploy Flutter App for iOS
+#    runs-on: macos-latest
+#
+#    steps:
+#      - name: Checkout Repository
+#        uses: actions/checkout@v4
+#
+#      - name: Setup Flutter
+#        uses: ./.github/actions/configure-flutter
+#        with:
+#          flutter-version: latest
+#          shell-type: bash
+#
+#      - name: Configure Firebase
+#        uses: ./.github/actions/configure-firebase
+#        with:
+#          node-version: ${{ matrix.node }}
+#          shell-type: bash
+#
+#      - name: Configure FlutterFire for Android
+#        uses: ./.github/actions/configure-flutterfire
+#        with:
+#          platforms: android
+#          firebase-token: ${{ secrets.FIREBASE_TOKEN }}
+#          firebase-project-id: ${{ secrets.FIREBASE_PROJECT_ID }}
+#          shell-type: bash
+#
+#      - name: Build Code with build_runner
+#        run: dart run build_runner build --delete-conflicting-outputs
+#
+#      - name: Build iOS IPA
+#        run: flutter build ios --release
+#
+#      - name: Upload Build iOS IPA
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: flutter-ios-build
+#          path: build/ios/Runner/Runner.ipa
+#
+#      - name: Upload IPA to Firebase
+#        run: |
+#          firebase appdistribution:distribute \
+#          build/ios/Runner/Runner.ipa \
+#          --app ${{ secrets.FIREBASE_APP_ID }} \
+#          --groups ${{ secrets.FIREBASE_TESTER_GROUPS }} \
+#          --token ${{ secrets.FIREBASE_TOKEN }}
