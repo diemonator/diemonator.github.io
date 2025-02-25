@@ -152,6 +152,7 @@ jobs:
       - name: Build Android APK
         run: | 
           flutter build apk \
+          --flavor ${{ vars.FLAVOR }} \
           --build-name=${{ steps.build_number.outputs.build_number }} \
           --build-number=$GITHUB_RUN_NUMBER \
           --dart-define=BUILD_VERSION=${{ steps.build_number.outputs.build_number }}
@@ -160,12 +161,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: flutter-android-build
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: build/app/outputs/flutter-apk/app-${{ vars.FLAVOR }}-release.apk
 
       - name: Upload APK to Firebase
         run: |
           firebase appdistribution:distribute \
-          build/app/outputs/flutter-apk/app-release.apk \
+          build/app/outputs/flutter-apk/app-${{ vars.FLAVOR }}-release.apk \
           --app ${{ secrets.FIREBASE_APP_ID }} \
           --groups ${{ secrets.FIREBASE_TESTER_GROUPS }} \
           --token ${{ secrets.FIREBASE_TOKEN }}
