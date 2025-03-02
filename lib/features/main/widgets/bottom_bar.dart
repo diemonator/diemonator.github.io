@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/extensions/media_query_extensions.dart';
 import '../../../core/extensions/nav_items_extensions.dart';
-import '../../app/presentation/app_cubit.dart';
+import '../../app/presentation/app_bloc.dart';
 import 'footer.dart';
 
 class BottomBar extends StatelessWidget {
@@ -18,7 +18,7 @@ class BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<AppCubit>();
+    context.watch<AppBloc>();
     final isMobileScreen = context.isMobileScreen;
     if (!isMobileScreen) {
       return const Footer();

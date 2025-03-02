@@ -10,7 +10,7 @@ import '../../features/app/domain/repositories/theme_setting_repo.dart';
 import '../../features/app/domain/services/app_layout_service.dart';
 import '../../features/app/domain/services/app_localization_service.dart';
 import '../../features/app/domain/services/app_theme_service.dart';
-import '../../features/app/presentation/app_cubit.dart';
+import '../../features/app/presentation/app_bloc.dart';
 import '../../features/main/main_bloc.dart';
 import '../local_storage/local_storage.dart';
 import '../local_storage/setup_localstorage.dart';

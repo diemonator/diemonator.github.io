@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../features/app/presentation/app_cubit.dart';
+import '../../features/app/presentation/app_bloc.dart';
 
 extension MediaQueryExtensions on BuildContext {
   static const double mobileScreen = 480;
@@ -12,7 +12,7 @@ extension MediaQueryExtensions on BuildContext {
   static const double desktopScreen = 1000;
 
   bool get _isMobileLayoutEnabled {
-    return read<AppCubit>().state.isMobileLayoutEnabled;
+    return read<AppBloc>().state.isMobileLayoutEnabled;
   }
 
   double get screenWidth {

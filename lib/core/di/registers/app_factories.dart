@@ -3,7 +3,7 @@ part of '../locator.dart';
 Future<void> _setupAppFactories(GetIt getIt) async {
   getIt
     ..registerFactory(
-      () => AppCubit(
+      () => AppBloc(
         appTheme: getIt(),
         appLocalization: getIt(),
         appLayoutService: getIt(),

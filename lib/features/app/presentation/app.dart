@@ -5,7 +5,7 @@ import '../../../core/extensions/language_extensions.dart';
 import '../../../core/localization/generated/app_localizations.dart';
 import '../../../core/navigation/app_navigation.dart';
 import '../../../core/themes/themes.dart';
-import 'app_cubit.dart';
+import 'app_bloc.dart';
 import 'app_state.dart';
 
 class App extends StatelessWidget {
@@ -14,7 +14,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: BlocBuilder<AppCubit, AppState>(
+      child: BlocBuilder<AppBloc, AppState>(
         buildWhen: (state, previousState) {
           return state != previousState;
         },
