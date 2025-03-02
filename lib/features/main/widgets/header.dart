@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/app_assets.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../app/presentation/widgets/settings_popup_menu.dart';
+import '../main_bloc.dart';
+import '../main_event.dart';
 import 'route_title.dart';
 
 class Header extends StatelessWidget {
@@ -20,7 +23,12 @@ class Header extends StatelessWidget {
             width: 80,
             color: Colors.black,
             child: InkWell(
-              onTap: () => context.goNamed(AppRoutes.home.name),
+              onTap: () {
+                context.goNamed(AppRoutes.home.name);
+                context.read<MainBloc>().add(
+                      MainSyncRouteEvent(AppRoutes.home.path),
+                    );
+              },
               child: const Image(image: AssetImage(AppAssets.signature)),
             ),
           ),

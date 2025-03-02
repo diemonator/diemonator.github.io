@@ -54,7 +54,12 @@ class _MainViewState extends State<MainView> {
           appBar: isMobileScreen
               ? AppBar(
                   leading: InkWell(
-                    onTap: () => context.goNamed(AppRoutes.home.name),
+                    onTap: () {
+                      context.goNamed(AppRoutes.home.name);
+                      context.read<MainBloc>().add(
+                            MainSyncRouteEvent(AppRoutes.home.path),
+                          );
+                    },
                     child: const Image(image: AssetImage(AppAssets.signature)),
                   ),
                   title: const RouteTitle(),
