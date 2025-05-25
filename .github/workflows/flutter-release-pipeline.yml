@@ -52,7 +52,7 @@ jobs:
 
       - name: Build Flutter Web
         run: |
-          flutter build web --wasm \
+          flutter build web \
           --build-name=${{ steps.build_number.outputs.build_number }} \
           --build-number=$GITHUB_RUN_NUMBER \
           --dart-define=BUILD_VERSION=${{ steps.build_number.outputs.build_number }}
