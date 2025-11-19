@@ -30,6 +30,7 @@ extension ContactInfoContent on ContactInfo {
 
 Future<void> _mailTo() async {
   final uri = Uri(scheme: 'mailto', path: email);
+
   if (await canLaunchUrl(uri)) {
     await launchUrl(uri);
   }

@@ -19,18 +19,18 @@ class ContactsView extends StatelessWidget {
 
     final title = Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: .center,
+        crossAxisAlignment: .end,
         mainAxisSize: MainAxisSize.min,
         children: [
           SelectableText(
             lang.getInTouch,
-            textAlign: TextAlign.center,
+            textAlign: .center,
             style: TextStyle(fontSize: isTabletSizedScreen ? 56 : 84),
           ),
           SelectableText(
             lang.sayHello,
-            textAlign: TextAlign.right,
+            textAlign: .right,
             style: TextStyle(fontSize: isTabletSizedScreen ? 16 : 24),
           ),
         ],
@@ -44,7 +44,7 @@ class ContactsView extends StatelessWidget {
               GestureDetector(
                 onTap: e.onTap,
                 child: Row(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize: .min,
                   children: [
                     Icon(e.icon),
                     const Gap(24),
@@ -68,7 +68,7 @@ class ContactsView extends StatelessWidget {
             onTap: e.onTap,
             child: SvgPicture.asset(
               e.svgPath,
-              colorFilter: ColorFilter.mode(primaryColor, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(primaryColor, .srcIn),
               height: 24,
               width: 24,
             ),
@@ -77,15 +77,15 @@ class ContactsView extends StatelessWidget {
         .toList();
 
     final body = Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: .center,
+      mainAxisSize: .min,
       children: [
         DecoratedBox(
           decoration: BoxDecoration(
             border: Border(bottom: BorderSide(color: primaryColor)),
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: .start,
             children: contactInfos,
           ),
         ),
@@ -105,7 +105,7 @@ class ContactsView extends StatelessWidget {
           ? Center(
               child: SingleChildScrollView(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: .center,
                   children: [title, const Gap(32), body, const Gap(16)],
                 ),
               ),

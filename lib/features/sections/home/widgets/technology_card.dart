@@ -26,7 +26,7 @@ class TechnologyCard extends StatelessWidget {
             SelectableText(title),
             const Gap(8),
             Wrap(
-              alignment: WrapAlignment.center,
+              alignment: .center,
               runSpacing: 8,
               spacing: 8,
               children: children

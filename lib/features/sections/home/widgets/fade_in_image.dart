@@ -44,7 +44,7 @@ class _FadeInImageWithTickerState extends State<FadeInImageWithTicker>
         image: AssetImage(AppAssets.cover),
         width: 300,
         height: 300,
-        fit: BoxFit.cover,
+        fit: .cover,
       ),
     );
   }

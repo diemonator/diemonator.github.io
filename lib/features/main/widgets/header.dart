@@ -41,7 +41,7 @@ class Header extends StatelessWidget {
                   ),
                 ),
                 Align(
-                  alignment: Alignment.centerRight,
+                  alignment: .centerRight,
                   child: SettingsPopupMenu(),
                 ),
               ],

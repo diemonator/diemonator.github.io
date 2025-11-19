@@ -18,12 +18,12 @@ class PortfolioFrameworkBadge extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: .center,
         children: [
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              shape: BoxShape.circle,
+              shape: .circle,
               color: Theme.of(context).focusColor,
             ),
             child: Icon(

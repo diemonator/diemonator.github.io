@@ -56,13 +56,13 @@ class ProfileTimeline extends StatelessWidget {
             const Gap(48.0),
             Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: .start,
                 children: [
                   SelectableText(
                     title,
                     style: const TextStyle(
                       fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: .bold,
                     ),
                   ),
                   SelectableText(
@@ -74,7 +74,7 @@ class ProfileTimeline extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 16,
                       color: Colors.grey,
-                      fontStyle: FontStyle.italic,
+                      fontStyle: .italic,
                     ),
                   ),
                   const Gap(8),

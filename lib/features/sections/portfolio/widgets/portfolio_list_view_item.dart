@@ -32,10 +32,7 @@ class PortfolioListViewItem extends StatelessWidget {
                   children: [
                     SelectableText(
                       item.title,
-                      style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: const TextStyle(fontSize: 24, fontWeight: .bold),
                     ),
                     const Gap(24),
                     Row(
@@ -62,7 +59,7 @@ class PortfolioListViewItem extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: const BoxDecoration(
-              shape: BoxShape.circle,
+              shape: .circle,
               color: Colors.deepPurpleAccent,
             ),
             child: SvgPicture.asset(

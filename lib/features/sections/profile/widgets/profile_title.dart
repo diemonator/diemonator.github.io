@@ -12,7 +12,7 @@ class ProfileTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return SelectableText(
       title,
-      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      style: const TextStyle(fontSize: 20, fontWeight: .bold),
     );
   }
 }

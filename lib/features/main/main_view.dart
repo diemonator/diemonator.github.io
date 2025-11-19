@@ -97,7 +97,7 @@ class _MainViewState extends State<MainView> {
                       ),
                     Expanded(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: .start,
                         children: [Expanded(child: widget._child)],
                       ),
                     ),

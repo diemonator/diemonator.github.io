@@ -25,7 +25,7 @@ class HomeView extends StatelessWidget {
       child: ListView(
         children: [
           Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: .center,
             children: [
               const Gap(24),
               Padding(
@@ -36,15 +36,15 @@ class HomeView extends StatelessWidget {
                       lang.personalStatement,
                       style: TextStyle(
                         fontSize: context.textScale(32),
-                        fontWeight: FontWeight.bold,
+                        fontWeight: .bold,
                       ),
-                      textAlign: TextAlign.center,
+                      textAlign: .center,
                     ),
                     const Gap(16),
                     SelectableText(
                       lang.codingPhilosophy,
                       style: TextStyle(fontSize: context.textScale(16)),
-                      textAlign: TextAlign.center,
+                      textAlign: .center,
                     ),
                   ],
                 ),
@@ -70,7 +70,7 @@ class HomeView extends StatelessWidget {
               children: [
                 Expanded(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: .center,
                     children: [
                       const IntroductionCard(),
                       TechnologyCard(
@@ -90,7 +90,7 @@ class HomeView extends StatelessWidget {
                       image: const AssetImage(AppAssets.cover),
                       width: imageWidth,
                       height: imageHeight,
-                      fit: BoxFit.contain,
+                      fit: .contain,
                     ),
                   ),
               ],
