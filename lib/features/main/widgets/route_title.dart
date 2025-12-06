@@ -35,10 +35,7 @@ class _RouteTitleState extends State<RouteTitle>
     );
 
     _fadeAnimation = _tweenFadeIn.animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeInOut,
-      ),
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
     );
 
     _animationController.forward();
@@ -65,9 +62,9 @@ class _RouteTitleState extends State<RouteTitle>
 
   @override
   void dispose() {
-    super.dispose();
     _animationController.dispose();
     routerDelegate.removeListener(_updateUi);
+    super.dispose();
   }
 
   String _getLocalizedLabel() {

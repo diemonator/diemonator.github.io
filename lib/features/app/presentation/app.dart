@@ -13,22 +13,20 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: BlocBuilder<AppBloc, AppState>(
-        buildWhen: (state, previousState) {
-          return state != previousState;
-        },
-        builder: (context, state) => MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          routerConfig: goRouterDelegate,
-          themeMode: state.themeMode,
-          theme: theme,
-          darkTheme: darkTheme,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          locale: state.locale,
-          onGenerateTitle: (context) => context.appLocalizations.appTitle,
-        ),
+    return BlocBuilder<AppBloc, AppState>(
+      buildWhen: (state, previousState) {
+        return state != previousState;
+      },
+      builder: (context, state) => MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        routerConfig: goRouterDelegate,
+        themeMode: state.themeMode,
+        theme: theme,
+        darkTheme: darkTheme,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        locale: state.locale,
+        onGenerateTitle: (context) => context.appLocalizations.appTitle,
       ),
     );
   }
