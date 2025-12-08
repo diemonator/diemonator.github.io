@@ -57,6 +57,9 @@ class SettingsPopupMenu extends StatelessWidget {
                       appBloc.add(
                         ToggleLayoutEvent(isMobileLayoutEnabled: value),
                       );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(lang.refresh)),
+                      );
                     },
                   );
                 },
