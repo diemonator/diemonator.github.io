@@ -3,6 +3,12 @@
 
 All notable changes will be documented in this file.
 
+## [1.1.1]
+- chore(web): revert scaffold messenger
+- chore(performance): Minor fixes
+- chore(flutter): Web fix
+- chore(flutter): Updating flutter version
+
 ## [1.1.0]
 - chore(flutter): Upgrade flutter
 
