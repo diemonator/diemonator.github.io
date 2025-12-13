@@ -26,17 +26,12 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends State<MainView> {
-  bool _initialized = false;
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    if (!_initialized) {
-      _initialized = true;
-      final path = GoRouter.of(context).state.uri.path;
-      context.read<MainBloc>().add(MainSyncRouteEvent(path));
-    }
+    final path = GoRouterState.of(context).uri.path;
+    context.read<MainBloc>().add(MainSyncRouteEvent(path));
   }
 
   @override
@@ -57,8 +52,8 @@ class _MainViewState extends State<MainView> {
                     onTap: () {
                       context.goNamed(AppRoutes.home.name);
                       context.read<MainBloc>().add(
-                            MainSyncRouteEvent(AppRoutes.home.path),
-                          );
+                        MainSyncRouteEvent(AppRoutes.home.path),
+                      );
                     },
                     child: const Image(image: AssetImage(AppAssets.signature)),
                   ),
@@ -68,13 +63,10 @@ class _MainViewState extends State<MainView> {
               : null,
           bottomNavigationBar: BlocBuilder<MainBloc, MainState>(
             builder: (context, state) {
-              return BottomBar(
-                state.currentIndex,
-                (index) {
-                  mainBloc.add(MainNavigationEvent(index));
-                  context.go(AppRoutes.tabs[index].path);
-                },
-              );
+              return BottomBar(state.currentIndex, (index) {
+                mainBloc.add(MainNavigationEvent(index));
+                context.go(AppRoutes.tabs[index].path);
+              });
             },
           ),
           body: Column(
@@ -86,13 +78,10 @@ class _MainViewState extends State<MainView> {
                     if (!isMobileScreen)
                       BlocBuilder<MainBloc, MainState>(
                         builder: (context, state) {
-                          return Navbar(
-                            state.currentIndex,
-                            (index) {
-                              mainBloc.add(MainNavigationEvent(index));
-                              context.go(AppRoutes.tabs[index].path);
-                            },
-                          );
+                          return Navbar(state.currentIndex, (index) {
+                            mainBloc.add(MainNavigationEvent(index));
+                            context.go(AppRoutes.tabs[index].path);
+                          });
                         },
                       ),
                     Expanded(
