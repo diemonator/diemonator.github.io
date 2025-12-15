@@ -5,7 +5,7 @@ import 'package:result_dart/result_dart.dart';
 import '../../../../core/utilities/theme_utilities.dart';
 import '../repositories/theme_setting_repo.dart';
 
-final class AppThemeService extends ChangeNotifier {
+class AppThemeService extends ChangeNotifier {
   AppThemeService(this._themeSettingsRepo);
 
   final ThemeSettingRepo _themeSettingsRepo;

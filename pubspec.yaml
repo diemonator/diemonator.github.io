@@ -48,6 +48,8 @@ dev_dependencies:
   build_runner: ^2.10.4
   freezed: ^3.2.3
   json_serializable: ^6.11.2
+  bloc_test: ^10.0.0
+  mocktail: ^1.0.4
 
 flutter:
   generate: true

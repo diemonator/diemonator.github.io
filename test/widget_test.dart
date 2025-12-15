@@ -20,7 +20,7 @@ void main() {
       ),
     );
 
-    // Verify that the app starts (finds MaterialApp by checking for something common inside it,
+    // Verify that the app starts (finds MaterialApp
     // or just that it didn't crash).
     // The App widget builds a MaterialApp.router, which is a MaterialApp.
     expect(find.byType(App), findsOneWidget);

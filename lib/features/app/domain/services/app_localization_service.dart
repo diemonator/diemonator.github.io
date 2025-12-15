@@ -3,7 +3,7 @@ import 'package:result_dart/result_dart.dart';
 
 import '../repositories/locale_setting_repo.dart';
 
-final class AppLocalizationService extends ChangeNotifier {
+class AppLocalizationService extends ChangeNotifier {
   AppLocalizationService(this._localeSettingsRepo);
 
   final LocaleSettingRepo _localeSettingsRepo;
