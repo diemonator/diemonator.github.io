@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final class LocalStorage {
+class LocalStorage {
   const LocalStorage(this._sharedPreferences);
 
   final SharedPreferences _sharedPreferences;

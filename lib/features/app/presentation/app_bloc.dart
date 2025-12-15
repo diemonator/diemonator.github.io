@@ -6,21 +6,21 @@ import '../domain/services/app_theme_service.dart';
 import 'app_event.dart';
 import 'app_state.dart';
 
-final class AppBloc extends Bloc<AppEvent, AppState> {
+class AppBloc extends Bloc<AppEvent, AppState> {
   AppBloc({
     required final AppThemeService appTheme,
     required final AppLocalizationService appLocalization,
     required final AppLayoutService appLayoutService,
-  })  : _appTheme = appTheme,
-        _appLocalization = appLocalization,
-        _appLayoutService = appLayoutService,
-        super(
-          AppState(
-            appLocalization.currentLocalization,
-            appTheme.currentThemeMode,
-            isMobileLayoutEnabled: appLayoutService.isMobileEnabled,
-          ),
-        ) {
+  }) : _appTheme = appTheme,
+       _appLocalization = appLocalization,
+       _appLayoutService = appLayoutService,
+       super(
+         AppState(
+           appLocalization.currentLocalization,
+           appTheme.currentThemeMode,
+           isMobileLayoutEnabled: appLayoutService.isMobileEnabled,
+         ),
+       ) {
     on<ToggleThemeEvent>(_onToggleTheme);
     on<ToggleLocalizationEvent>(_onToggleLocalization);
     on<ToggleLayoutEvent>(_onToggleLayout);
@@ -35,10 +35,7 @@ final class AppBloc extends Bloc<AppEvent, AppState> {
   final AppLocalizationService _appLocalization;
   final AppLayoutService _appLayoutService;
 
-  Future<void> _onToggleTheme(
-    ToggleThemeEvent event,
-    Emitter<AppState> emit,
-  ) {
+  Future<void> _onToggleTheme(ToggleThemeEvent event, Emitter<AppState> emit) {
     return _appTheme.toggleTheme();
   }
 

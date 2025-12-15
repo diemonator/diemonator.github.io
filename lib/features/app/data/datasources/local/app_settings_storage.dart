@@ -6,7 +6,7 @@ import '../../../domain/models/app_settings/app_settings.dart';
 
 const String _appSettingsKey = 'app_settings';
 
-final class AppSettingsStorage {
+class AppSettingsStorage {
   const AppSettingsStorage(this._localStorage);
 
   final LocalStorage _localStorage;
