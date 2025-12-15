@@ -1,5 +1,8 @@
 # Portfolio Website
 
+![Build Status](https://img.shields.io/github/actions/workflow/status/diemonator/diemonator.github.io/flutter-staging-pipeline.yml?branch=main)
+![Coverage](https://img.shields.io/codecov/c/github/diemonator/diemonator.github.io/main.svg)
+
 Welcome to my personal portfolio website! This site showcases my skills, projects, and experiences, providing a glimpse into my professional journey.
 
 ## Features
