@@ -29,9 +29,8 @@ void main() {
     test('changeLocale calls saveLocale when locale is different', () async {
       // Arrange
       when(() => localeSettingRepo.locale).thenReturn(const Locale('en'));
-      when(
-        () => localeSettingRepo.saveLocale(any()),
-      ).thenAnswer((_) async => Success.unit());
+      when(() => localeSettingRepo.saveLocale(any()))
+          .thenAnswer((_) async => Success.unit());
 
       // Act
       await appLocalizationService.changeLocale(const Locale('bg'));

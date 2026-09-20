@@ -30,9 +30,8 @@ void main() {
     test('toggleTheme toggles from dark to light', () async {
       // Arrange
       when(() => themeSettingRepo.themeMode).thenReturn(ThemeMode.dark);
-      when(
-        () => themeSettingRepo.saveTheme(any()),
-      ).thenAnswer((_) async => Success.unit());
+      when(() => themeSettingRepo.saveTheme(any()))
+          .thenAnswer((_) async => Success.unit());
 
       // Act
       await appThemeService.toggleTheme();
@@ -44,9 +43,8 @@ void main() {
     test('toggleTheme toggles from light to dark', () async {
       // Arrange
       when(() => themeSettingRepo.themeMode).thenReturn(ThemeMode.light);
-      when(
-        () => themeSettingRepo.saveTheme(any()),
-      ).thenAnswer((_) async => Success.unit());
+      when(() => themeSettingRepo.saveTheme(any()))
+          .thenAnswer((_) async => Success.unit());
 
       // Act
       await appThemeService.toggleTheme();
@@ -61,9 +59,8 @@ void main() {
       // So System Theme is Light.
       // We set current theme to Dark, so they differ.
       when(() => themeSettingRepo.themeMode).thenReturn(ThemeMode.dark);
-      when(
-        () => themeSettingRepo.saveTheme(any()),
-      ).thenAnswer((_) async => Success.unit());
+      when(() => themeSettingRepo.saveTheme(any()))
+          .thenAnswer((_) async => Success.unit());
 
       // Act
       await appThemeService.switchToSystemTheme();

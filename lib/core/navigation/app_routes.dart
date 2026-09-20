@@ -43,29 +43,23 @@ enum AppRoutes {
     title: 'Desktop',
     iconData: Icons.desktop_windows_outlined,
   ),
-  backend(
-    'backend',
-    '/backend',
-    title: 'Backend',
-    iconData: Icons.code,
-  ),
+  backend('backend', '/backend', title: 'Backend', iconData: Icons.code),
   databases(
     'databases',
     '/databases',
     title: 'Databases',
     iconData: Icons.storage,
-  ),
-  ;
+  );
 
   const AppRoutes(
     this.name,
     this.path, {
     required this.iconData,
     this.title = '',
-  })  : children = const [],
-        isTab = false,
-        activeIcon = null,
-        assetPath = '';
+  }) : children = const [],
+       isTab = false,
+       activeIcon = null,
+       assetPath = '';
 
   const AppRoutes.tab(
     this.name,
@@ -73,9 +67,9 @@ enum AppRoutes {
     required this.iconData,
     required this.activeIcon,
     this.children = const [],
-  })  : isTab = true,
-        title = '',
-        assetPath = '';
+  }) : isTab = true,
+       title = '',
+       assetPath = '';
 
   final String name;
   final String path;

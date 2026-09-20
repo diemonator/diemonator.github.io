@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:portfolio/core/local_storage/local_storage.dart';
@@ -45,9 +46,8 @@ void main() {
       'getAppSettings deletes string and returns null on FormatException',
       () {
         when(() => localStorage.getString(any())).thenReturn(invalidJson);
-        when(
-          () => localStorage.deleteString(any()),
-        ).thenAnswer((_) async => true);
+        when(() => localStorage.deleteString(any()))
+            .thenAnswer((_) async => true);
 
         final result = appSettingsStorage.getAppSettings();
 
@@ -57,9 +57,8 @@ void main() {
     );
 
     test('saveAppSettings returns true on success', () async {
-      when(
-        () => localStorage.setString(any(), any()),
-      ).thenAnswer((_) async => true);
+      when(() => localStorage.setString(any(), any()))
+          .thenAnswer((_) async => true);
 
       final result = await appSettingsStorage.saveAppSettings(
         appSettings: validAppSettings,
@@ -72,9 +71,8 @@ void main() {
     test(
       'saveAppSettings returns false when FormatException occurs (mocked)',
       () async {
-        when(
-          () => localStorage.setString(any(), any()),
-        ).thenThrow(const FormatException('mock'));
+        when(() => localStorage.setString(any(), any()))
+            .thenThrow(const FormatException('mock'));
 
         final result = await appSettingsStorage.saveAppSettings(
           appSettings: validAppSettings,

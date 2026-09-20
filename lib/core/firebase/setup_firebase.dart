@@ -9,14 +9,10 @@ import '../../firebase_options.dart';
 const fatalError = true;
 
 Future<void> setupFirebase() async {
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   final analytics = FirebaseAnalytics.instance;
-  await analytics.logAppOpen(
-    callOptions: AnalyticsCallOptions(global: true),
-  );
+  await analytics.logAppOpen(callOptions: AnalyticsCallOptions(global: true));
 
   final remoteConfig = FirebaseRemoteConfig.instance;
   await remoteConfig.setConfigSettings(

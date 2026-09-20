@@ -7,11 +7,11 @@ part 'app_settings.g.dart';
 @freezed
 sealed class AppSettings with _$AppSettings {
   const factory AppSettings({
-    required final String languageCode,
-    required final String theme,
-    required final bool isMobileLayoutEnabled,
-    final String? scriptCode,
-    final String? countryCode,
+    required String languageCode,
+    required String theme,
+    required bool isMobileLayoutEnabled,
+    String? scriptCode,
+    String? countryCode,
   }) = _AppSettings;
 
   factory AppSettings.fromJson(Map<String, Object?> json) =>

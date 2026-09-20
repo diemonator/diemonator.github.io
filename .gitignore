@@ -44,6 +44,8 @@ app.*.symbols
 app.*.map.json
 
 # Android Studio will place build artifacts here
+# Gradle 9 writes its problems report here, outside the redirected build dir.
+/android/build/
 /android/app/debug
 /android/app/profile
 /android/app/release

@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:portfolio/core/extensions/media_query_extensions.dart';
-import 'package:portfolio/features/app/presentation/app_bloc.dart';
-import 'package:portfolio/features/app/presentation/app_state.dart';
+import 'package:portfolio/features/app/presentation/bloc/app_bloc.dart';
+import 'package:portfolio/features/app/presentation/bloc/app_state.dart';
 
 class MockAppBloc extends Mock implements AppBloc {}
 
@@ -160,33 +160,48 @@ void main() {
       expect(find.text('true'), findsOneWidget);
     });
 
-    testWidgets(
-      'gridChildCountAndRatio returns correct values for small width',
-      (tester) async {
-        await tester.pumpWidget(pumpWidgetWithMedia(tester, 780));
-        // 780 - 300 = 480 <= 480. Col: 1, Ratio: 1.4
-
+    testWidgets('gridChildCountAndRatio scales columns with width', (
+      tester,
+    ) async {
+      // contentWidth = width - 80 rail; one column per 360, clamped to 1..4.
+      for (final (width, columns) in [
+        (400.0, 1), // phone: 400 content
+        (780.0, 1), // 700 content
+        (800.0, 2), // 720 content
+        (2400.0, 4), // 2320 content, clamped
+      ]) {
+        await tester.pumpWidget(pumpWidgetWithMedia(tester, width));
         final BuildContext context = tester.element(find.byType(SizedBox));
         final result = context.gridChildCountAndRatio;
 
-        expect(result.columnCount, 1);
-        expect(result.ratio, 1.4);
-      },
-    );
+        expect(result.columnCount, columns, reason: 'at width $width');
+        expect(result.ratio, columns == 1 ? 1.4 : 1.6, reason: 'at $width');
+      }
+    });
 
-    testWidgets(
-      'gridChildCountAndRatio returns correct values for large width',
-      (tester) async {
-        await tester.pumpWidget(pumpWidgetWithMedia(tester, 781));
-        // 781 - 300 = 481 > 480. Col: 2, Ratio: 2
+    testWidgets('contentPadding gutters phones and centres wide screens', (
+      tester,
+    ) async {
+      // Phone: flat 16 gutter.
+      await tester.pumpWidget(pumpWidgetWithMedia(tester, 400));
+      var context = tester.element(find.byType(SizedBox));
+      expect(context.contentPadding.left, 16);
 
-        final BuildContext context = tester.element(find.byType(SizedBox));
-        final result = context.gridChildCountAndRatio;
+      // Desktop below the cap: flat 42 gutter.
+      await tester.pumpWidget(pumpWidgetWithMedia(tester, 1000));
+      context = tester.element(find.byType(SizedBox));
+      expect(context.contentPadding.left, 42);
 
-        expect(result.columnCount, 2);
-        expect(result.ratio, 2);
-      },
-    );
+      // Past the cap: gutters grow so text stays <= maxContentWidth.
+      await tester.pumpWidget(pumpWidgetWithMedia(tester, 2000));
+      context = tester.element(find.byType(SizedBox));
+      final padding = context.contentPadding;
+      expect(padding.left, (2000 - 80 - 1100) / 2);
+      expect(
+        context.contentWidth - padding.horizontal,
+        MediaQueryExtensions.maxContentWidth,
+      );
+    });
 
     testWidgets('textScale returns scaled value', (tester) async {
       // Case 1: Desktop (1000px), scale 20. result 20.

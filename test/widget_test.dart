@@ -1,8 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:portfolio/core/di/locator.dart';
+import 'package:get_it/get_it.dart';
+import 'package:portfolio/core/di/di.dart';
 import 'package:portfolio/features/app/presentation/app.dart';
-import 'package:portfolio/features/app/presentation/app_bloc.dart';
+import 'package:portfolio/features/app/presentation/bloc/app_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -11,11 +12,13 @@ void main() {
     SharedPreferences.setMockInitialValues({});
 
     // Setup DI
-    await locator.initLocator();
+    await GetIt.I.reset();
+    DiExtensions.resetInitGuard();
+    await GetIt.I.initDi(await SharedPreferences.getInstance());
 
     await tester.pumpWidget(
       BlocProvider<AppBloc>(
-        create: (context) => locator.get(),
+        create: (context) => GetIt.I<AppBloc>(),
         child: const App(),
       ),
     );

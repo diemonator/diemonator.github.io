@@ -1,6 +1,5 @@
 sealed class AppAssets {
   // images
-  static const String signature = 'assets/images/signature.png';
   static const String cover = 'assets/images/cover.jpg';
   static const String embeddedFitness = 'assets/images/embedded_fitness.png';
   static const String kaizenGaming = 'assets/images/kaizen_gaming.png';
@@ -11,6 +10,7 @@ sealed class AppAssets {
   static const String me = 'assets/images/me.jpg';
 
   // svgs
+  static const String signature = 'assets/svgs/signature.svg';
   static const String homeCover = 'assets/svgs/hero-devices.svg';
   static const String js = 'assets/svgs/js.svg';
   static const String ts = 'assets/svgs/typescript.svg';
@@ -38,4 +38,49 @@ sealed class AppAssets {
   static const String db = 'assets/svgs/db.svg';
   static const String dbDoc = 'assets/svgs/mongodb-doc.svg';
   static const String sql = 'assets/svgs/sql.svg';
+
+  /// Raster assets, warmed through Flutter's [ImageCache].
+  static const List<String> images = [
+    cover,
+    embeddedFitness,
+    kaizenGaming,
+    vanderlande,
+    appolica,
+    authore,
+    fontys,
+    me,
+  ];
+
+  /// Vector assets, warmed through flutter_svg's own cache. Kept separate
+  /// because the two caches are unrelated and warmed differently.
+  static const List<String> svgs = [
+    signature,
+    homeCover,
+    js,
+    ts,
+    kotlin,
+    java,
+    cSharp,
+    flutter,
+    dart,
+    swift,
+    android,
+    ios,
+    asp,
+    node,
+    linkedin,
+    gmail,
+    github,
+    budget,
+    flutterPackage,
+    imgur,
+    layers,
+    modularplug,
+    portfolio,
+    youtube,
+    stretching,
+    db,
+    dbDoc,
+    sql,
+  ];
 }

@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:portfolio/core/di/locator.dart';
+import 'package:portfolio/core/di/di.dart';
 import 'package:portfolio/features/app/presentation/app.dart';
-import 'package:portfolio/features/app/presentation/app_bloc.dart';
-import 'package:portfolio/features/main/main_view.dart';
+import 'package:portfolio/features/app/presentation/bloc/app_bloc.dart';
+import 'package:portfolio/features/main/presentation/main_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -16,12 +16,13 @@ void main() {
     // 1. Setup (similar to smoke test, assuming we want isolated test
     SharedPreferences.setMockInitialValues({});
     await GetIt.I.reset();
-    await locator.initLocator();
+    DiExtensions.resetInitGuard();
+    await GetIt.I.initDi(await SharedPreferences.getInstance());
 
     // 2. Pump widget
     await tester.pumpWidget(
       BlocProvider<AppBloc>(
-        create: (context) => locator.get<AppBloc>(),
+        create: (context) => GetIt.I<AppBloc>(),
         child: const App(),
       ),
     );
@@ -66,7 +67,6 @@ void main() {
       final switches = find.byType(Switch);
       if (findsOneWidget.matches(switches, {}) ||
           findsNWidgets(2).matches(switches, {})) {
-
         // Tap the first switch (Dark Mode)
         await tester.tap(switches.first);
         await tester.pumpAndSettle();

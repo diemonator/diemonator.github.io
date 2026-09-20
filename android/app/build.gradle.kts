@@ -1,5 +1,6 @@
 import java.util.Properties
 import java.io.FileInputStream
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id ("com.android.application")
@@ -15,7 +16,8 @@ plugins {
 
 val keystoreProperties = Properties()
 val keystorePropertiesFile = rootProject.file("key.properties")
-if (keystorePropertiesFile.exists()) {
+val hasKeystore = keystorePropertiesFile.exists()
+if (hasKeystore) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
@@ -23,6 +25,12 @@ android {
     namespace = "com.example.portfolio"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
+
+    buildFeatures {
+        // AGP 9 defaults this off; the flavors below declare app_name via
+        // resValue, which silently stops being generated without it.
+        resValues = true
+    }
 
     flavorDimensions += "default"
 
@@ -43,10 +51,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-    }
-
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.example.portfolio"
@@ -59,11 +63,16 @@ android {
     }
 
     signingConfigs {
-        create("release") {
-            keyAlias = keystoreProperties["keyAlias"] as String
-            keyPassword = keystoreProperties["keyPassword"] as String
-            storeFile = keystoreProperties["storeFile"]?.let { file(it) }
-            storePassword = keystoreProperties["storePassword"] as String
+        // key.properties is gitignored, so it is absent on a fresh clone and
+        // in CI. Casting its missing values fails configuration for *every*
+        // task, debug included, so only declare the config when it is there.
+        if (hasKeystore) {
+            create("release") {
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["keyPassword"] as String
+                storeFile = keystoreProperties["storeFile"]?.let { file(it) }
+                storePassword = keystoreProperties["storePassword"] as String
+            }
         }
     }
 
@@ -73,8 +82,18 @@ android {
         }
 
         release {
-            signingConfig = signingConfigs.getByName("release")
+            // Without the keystore a release build is debug-signed rather than
+            // unbuildable — shippable artifacts still require key.properties.
+            signingConfig = signingConfigs.getByName(
+                if (hasKeystore) "release" else "debug"
+            )
         }
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_17
     }
 }
 

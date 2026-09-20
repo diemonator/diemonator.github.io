@@ -7,9 +7,9 @@ import '../../../../core/extensions/language_extensions.dart';
 import '../../../../core/localization/generated/app_localizations.dart';
 import '../../../../core/utilities/localization_utilities.dart';
 import '../../../../core/utilities/platform_utilities.dart';
-import '../app_bloc.dart';
-import '../app_event.dart';
-import '../app_state.dart';
+import '../bloc/app_bloc.dart';
+import '../bloc/app_event.dart';
+import '../bloc/app_state.dart';
 
 class SettingsPopupMenu extends StatelessWidget {
   const SettingsPopupMenu({super.key});
@@ -57,9 +57,8 @@ class SettingsPopupMenu extends StatelessWidget {
                       appBloc.add(
                         ToggleLayoutEvent(isMobileLayoutEnabled: value),
                       );
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(lang.refresh)),
-                      );
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text(lang.refresh)));
                     },
                   );
                 },

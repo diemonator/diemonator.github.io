@@ -23,25 +23,22 @@ void main() {
     });
 
     test('getString returns null on PlatformException', () {
-      when(
-        () => mockPrefs.getString(any()),
-      ).thenThrow(PlatformException(code: 'error'));
+      when(() => mockPrefs.getString(any()))
+          .thenThrow(PlatformException(code: 'error'));
       final result = localStorage.getString('error_key');
       expect(result, null);
     });
 
     test('setString returns true on success', () async {
-      when(
-        () => mockPrefs.setString(any(), any()),
-      ).thenAnswer((_) async => true);
+      when(() => mockPrefs.setString(any(), any()))
+          .thenAnswer((_) async => true);
       final success = await localStorage.setString('key', 'value');
       expect(success, true);
     });
 
     test('setString returns false on PlatformException', () async {
-      when(
-        () => mockPrefs.setString(any(), any()),
-      ).thenThrow(PlatformException(code: 'error'));
+      when(() => mockPrefs.setString(any(), any()))
+          .thenThrow(PlatformException(code: 'error'));
       final success = await localStorage.setString('key', 'value');
       expect(success, false);
     });
@@ -52,10 +49,28 @@ void main() {
       expect(success, true);
     });
 
-    test('deleteString returns false on PlatformException', () async {
+    // The `thenThrow` cases above fail synchronously, which a bare
+    // `return future` inside a try block still catches. These reject the
+    // future instead — the path that escapes an unawaited return.
+    test('setString returns false when the future rejects', () async {
+      when(
+        () => mockPrefs.setString(any(), any()),
+      ).thenAnswer((_) => Future<bool>.error(PlatformException(code: 'error')));
+
+      await expectLater(localStorage.setString('k', 'v'), completion(false));
+    });
+
+    test('deleteString returns false when the future rejects', () async {
       when(
         () => mockPrefs.remove(any()),
-      ).thenThrow(PlatformException(code: 'error'));
+      ).thenAnswer((_) => Future<bool>.error(PlatformException(code: 'error')));
+
+      await expectLater(localStorage.deleteString('k'), completion(false));
+    });
+
+    test('deleteString returns false on PlatformException', () async {
+      when(() => mockPrefs.remove(any()))
+          .thenThrow(PlatformException(code: 'error'));
       final success = await localStorage.deleteString('key');
       expect(success, false);
     });

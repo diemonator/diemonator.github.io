@@ -32,7 +32,7 @@ class AppSettingsStorage {
       final json = appSettings.toJson();
       final jsonText = jsonEncode(json);
 
-      return _localStorage.setString(_appSettingsKey, jsonText);
+      return await _localStorage.setString(_appSettingsKey, jsonText);
     } on FormatException catch (e, stackTrace) {
       log(e.toString(), stackTrace: stackTrace);
     }

@@ -20,7 +20,7 @@ class LocalStorage {
 
   Future<bool> deleteString(String key) async {
     try {
-      return _sharedPreferences.remove(key);
+      return await _sharedPreferences.remove(key);
     } on PlatformException catch (e, stackTrace) {
       log('Error deleting string $key', error: e, stackTrace: stackTrace);
     }
@@ -30,7 +30,7 @@ class LocalStorage {
 
   Future<bool> setString(String key, String value) async {
     try {
-      return _sharedPreferences.setString(key, value);
+      return await _sharedPreferences.setString(key, value);
     } on PlatformException catch (e, stackTrace) {
       log('Error setting string $key', error: e, stackTrace: stackTrace);
     }

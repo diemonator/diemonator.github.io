@@ -51,7 +51,6 @@ linter:
     no_leading_underscores_for_library_prefixes: true
     no_leading_underscores_for_local_identifiers: true
     null_check_on_nullable_type_parameter: true
-    one_member_abstracts: true
     only_throw_errors: true
     parameter_assignments: true
     prefer_expression_function_bodies: false
@@ -72,7 +71,6 @@ linter:
     unnecessary_raw_strings: true
     use_colored_box: true
     use_decorated_box: true
-    use_if_null_to_convert_nulls_to_bools: true
     use_is_even_rather_than_modulo: true
     use_named_constants: true
     use_to_and_as_if_applicable: true
@@ -90,9 +88,7 @@ linter:
     avoid_function_literals_in_foreach_calls: true
     avoid_implementing_value_types: true
     avoid_init_to_null: true
-    avoid_null_checks_in_equality_operators: true
     avoid_print: true
-    avoid_private_typedef_functions: true
     avoid_relative_lib_imports: true
     avoid_return_types_on_setters: true
     avoid_setters_without_getters: true
@@ -163,7 +159,6 @@ linter:
     tighten_type_of_initializing_formals: true
     type_annotate_public_apis: true
     type_init_formals: true
-    unnecessary_await_in_return: true
     unnecessary_brace_in_string_interps: true
     unnecessary_const: true
     unnecessary_getters_setters: true

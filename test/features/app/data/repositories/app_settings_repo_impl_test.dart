@@ -164,9 +164,8 @@ void main() {
       // Assert
       expect(result.isSuccess(), true);
       expect(appSettingsRepo.appSettings, newSettings);
-      verify(
-        () => appSettingsStorage.saveAppSettings(appSettings: newSettings),
-      ).called(1);
+      verify(() => appSettingsStorage.saveAppSettings(appSettings: newSettings))
+          .called(1);
     });
   });
 }

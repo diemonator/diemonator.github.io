@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import '../navigation/app_routes.dart';
 import 'language_extensions.dart';
 
-extension BottomNavigationBarItems on BottomNavigationBarItem {
-  static List<BottomNavigationBarItem> of(BuildContext context) {
+extension NavigationBarDestinations on NavigationDestination {
+  static List<NavigationDestination> of(BuildContext context) {
     return AppRoutes.tabs
         .map(
-          (tabRoute) => BottomNavigationBarItem(
+          (tabRoute) => NavigationDestination(
             label: context.getLocalizedNavItemLabel(tabRoute),
             icon: Icon(tabRoute.iconData),
-            activeIcon: Icon(tabRoute.activeIcon),
+            selectedIcon: Icon(tabRoute.activeIcon),
             tooltip: tabRoute.name,
           ),
         )
@@ -43,8 +43,8 @@ extension NavItemsExtensions on BuildContext {
     };
   }
 
-  List<BottomNavigationBarItem> get navBarItems {
-    return BottomNavigationBarItems.of(this);
+  List<NavigationDestination> get navBarItems {
+    return NavigationBarDestinations.of(this);
   }
 
   List<NavigationRailDestination> get navRailItems {
