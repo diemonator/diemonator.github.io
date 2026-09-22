@@ -1,12 +1,12 @@
 {
-    "name": "Portfolio",
-    "short_name": "Portfolio",
-    "start_url": ".",
+    "name": "Emil Karamihov \u2014 Software Engineer",
+    "short_name": "Portfolio E.K.",
+    "start_url": "/",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
-    "orientation": "portrait-primary",
+    "background_color": "#FAF9F7",
+    "theme_color": "#FAF9F7",
+    "description": "Portfolio of mobile, web, backend and desktop projects built with Flutter, Dart, Kotlin, Swift and .NET.",
+    "orientation": "any",
     "prefer_related_applications": false,
     "icons": [
         {

@@ -56,7 +56,7 @@ jobs:
         run: |
           # ponytail: staging has no version tag, so the build name comes from pubspec
           BUILD_VERSION=$(grep '^version:' pubspec.yaml | cut -d' ' -f2 | cut -d'+' -f1)
-          flutter build web \
+          flutter build web --wasm \
           --build-number=$GITHUB_RUN_NUMBER \
           --dart-define=BUILD_VERSION=$BUILD_VERSION-${GITHUB_SHA::7}
 

@@ -1,13 +1,13 @@
 sealed class AppAssets {
   // images
-  static const String cover = 'assets/images/cover.jpg';
-  static const String embeddedFitness = 'assets/images/embedded_fitness.png';
-  static const String kaizenGaming = 'assets/images/kaizen_gaming.png';
-  static const String vanderlande = 'assets/images/vanderlande.png';
-  static const String appolica = 'assets/images/appolica.png';
-  static const String authore = 'assets/images/author-e.png';
-  static const String fontys = 'assets/images/fontys.png';
-  static const String me = 'assets/images/me.jpg';
+  static const String cover = 'assets/images/cover.webp';
+  static const String embeddedFitness = 'assets/images/embedded_fitness.webp';
+  static const String kaizenGaming = 'assets/images/kaizen_gaming.webp';
+  static const String vanderlande = 'assets/images/vanderlande.webp';
+  static const String appolica = 'assets/images/appolica.webp';
+  static const String authore = 'assets/images/author-e.webp';
+  static const String fontys = 'assets/images/fontys.webp';
+  static const String me = 'assets/images/me.webp';
 
   // svgs
   static const String signature = 'assets/svgs/signature.svg';

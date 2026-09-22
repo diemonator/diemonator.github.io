@@ -7,5 +7,6 @@ _flutter.loader.load({
         useColorEmoji: true
     });
     await appRunner.runApp();
+    document.getElementById("loading")?.remove();
   }
 });

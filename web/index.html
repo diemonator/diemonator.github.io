@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -18,22 +18,57 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Emil Karamihov — software engineer. Portfolio of mobile, web, backend and desktop projects built with Flutter, Dart, Kotlin, Swift and .NET.">
+  <meta name="theme-color" content="#FAF9F7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12110F" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://diemonator.github.io/">
+
+  <!-- Link previews -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Emil Karamihov — Software Engineer">
+  <meta property="og:description" content="Portfolio of mobile, web, backend and desktop projects built with Flutter, Dart, Kotlin, Swift and .NET.">
+  <meta property="og:url" content="https://diemonator.github.io/">
+  <meta property="og:image" content="https://diemonator.github.io/icons/Icon-512.png">
+  <meta name="twitter:card" content="summary">
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="portfolio">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Portfolio E.K.">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-  <title>Portfolio</title>
+  <title>Emil Karamihov — Software Engineer</title>
   <link rel="manifest" href="manifest.json">
+
+  <!-- Painted before the engine downloads, removed by flutter_bootstrap.js. -->
+  <style>
+    html, body { margin: 0; height: 100%; background: #FAF9F7; }
+    #loading {
+      position: fixed; inset: 0; display: flex;
+      align-items: center; justify-content: center;
+    }
+    #loading::after {
+      content: ""; width: 2.5rem; height: 2.5rem; border-radius: 50%;
+      border: 3px solid #D6D1C8; border-top-color: #B45309;
+      animation: spin 0.9s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      #loading::after { animation-duration: 3s; }
+    }
+    @media (prefers-color-scheme: dark) {
+      html, body { background: #12110F; }
+      #loading::after { border-color: #2B2823; border-top-color: #FBBF24; }
+    }
+  </style>
 </head>
 <body>
+  <div id="loading"></div>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
