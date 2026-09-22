@@ -53,6 +53,12 @@ GoRouter createRouter() => GoRouter(
   navigatorKey: _rootNavigatorKey,
   initialLocation: AppRoutes.home.path,
   debugLogDiagnostics: true,
+  // Without this an unknown URL leaves the router holding no match, which is
+  // both go_router's raw developer error screen and a "Bad state: No element"
+  // out of every widget that reads the current route — MainView and RouteTitle
+  // both do. There is no 404 content worth showing on a portfolio, so send
+  // them home.
+  onException: (context, state, router) => router.go(AppRoutes.home.path),
   routes: [
     ShellRoute(
       pageBuilder: (context, state, child) => _fadePage(

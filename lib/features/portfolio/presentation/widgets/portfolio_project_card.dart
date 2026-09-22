@@ -8,14 +8,9 @@ import '../../domain/models/portfolio_project.dart';
 import 'project_description.dart';
 
 class PortfolioProjectCard extends StatelessWidget {
-  const PortfolioProjectCard({
-    required this.project,
-    required this.onOpenSource,
-    super.key,
-  });
+  const PortfolioProjectCard({required this.project, super.key});
 
   final PortfolioProject project;
-  final VoidCallback onOpenSource;
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +34,6 @@ class PortfolioProjectCard extends StatelessWidget {
         SelectableText(project.title, style: context.textTheme.titleLarge),
         const SizedBox(height: AppSpacing.md),
         ProjectDescription(project.description),
-        if (project.hasGitHubLink) ...[
-          const SizedBox(height: AppSpacing.lg),
-          FilledButton.tonalIcon(
-            onPressed: onOpenSource,
-            icon: const Icon(Icons.open_in_new, size: 18),
-            label: const Text('Source'),
-          ),
-        ],
       ],
     );
 

@@ -15,10 +15,6 @@ final class PortfolioProject extends Equatable {
   final String svgImage;
   final String? gitHubLink;
 
-  /// Empty strings live in the content, so treat them as "no link" rather than
-  /// rendering a button that goes nowhere.
-  bool get hasGitHubLink => gitHubLink != null && gitHubLink!.isNotEmpty;
-
   @override
   List<Object?> get props => [
     title,
