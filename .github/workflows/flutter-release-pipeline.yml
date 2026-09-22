@@ -35,15 +35,14 @@ jobs:
       - name: Configure Firebase
         uses: ./.github/actions/configure-firebase
         with:
-          node-version: ${{ matrix.node }}
           firebase-version: ${{ vars.FIREBASE_VERSION }}
+          service-account-key: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           shell-type: bash
 
       - name: Configure FlutterFire for Web
         uses: ./.github/actions/configure-flutterfire
         with:
           platforms: web
-          firebase-token: ${{ secrets.FIREBASE_TOKEN }}
           firebase-project-id: ${{ secrets.FIREBASE_PROJECT_ID }}
           shell-type: bash
 
@@ -137,15 +136,14 @@ jobs:
       - name: Configure Firebase
         uses: ./.github/actions/configure-firebase
         with:
-          node-version: ${{ matrix.node }}
           firebase-version: ${{ vars.FIREBASE_VERSION }}
+          service-account-key: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           shell-type: bash
 
       - name: Configure FlutterFire for Android
         uses: ./.github/actions/configure-flutterfire
         with:
           platforms: android
-          firebase-token: ${{ secrets.FIREBASE_TOKEN }}
           firebase-project-id: ${{ secrets.FIREBASE_PROJECT_ID }}
           shell-type: bash
 
@@ -174,8 +172,7 @@ jobs:
           firebase appdistribution:distribute \
           build/app/outputs/flutter-apk/app-${{ vars.FLAVOR }}-release.apk \
           --app ${{ secrets.FIREBASE_APP_ID }} \
-          --groups ${{ secrets.FIREBASE_TESTER_GROUPS }} \
-          --token ${{ secrets.FIREBASE_TOKEN }}
+          --groups ${{ secrets.FIREBASE_TESTER_GROUPS }}
 
 #  flutter-ios:
 #    name: Build & Deploy Flutter App for iOS

@@ -6,9 +6,6 @@ inputs:
   platforms:
     description: Platforms to configure (e.g., android, web)
     required: true
-  firebase-token:
-    description: Firebase token for authentication
-    required: true
   firebase-project-id:
     description: Firebase project ID
     required: true
@@ -19,10 +16,12 @@ inputs:
 runs:
   using: "composite"
   steps:
+    # Requires the configure-firebase action to have run first: it exports
+    # GOOGLE_APPLICATION_CREDENTIALS pointing at the service account key.
     - name: Configure FlutterFire
       run: |
         flutterfire configure \
-        --token=${{ inputs.firebase-token }} \
+        --service-account="$GOOGLE_APPLICATION_CREDENTIALS" \
         --project=${{ inputs.firebase-project-id }} \
         --platforms=${{ inputs.platforms }} \
         --yes

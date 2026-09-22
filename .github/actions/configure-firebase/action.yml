@@ -5,9 +5,13 @@ description: Configure Firebase
 inputs:
   node-version:
     description: Node.js version to use
-    required: true
+    required: false
+    default: "20"
   firebase-version:
     description: The version of Firebase to use
+    required: true
+  service-account-key:
+    description: Google service account JSON key used to authenticate the Firebase CLI
     required: true
   shell-type:
     description: The shell type to use
@@ -17,12 +21,22 @@ runs:
   using: "composite"
   steps:
     - name: Set up Node.js
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.node-version }}
 
     - name: Install Firebase CLI
-      run: | 
+      run: |
         npm install -g firebase-tools@${{ inputs.firebase-version }}
         firebase --version
+      shell: ${{ inputs.shell-type }}
+
+    # ponytail: login:ci tokens were removed in firebase-tools v14, so every
+    # Firebase/FlutterFire call in the job authenticates via this key file.
+    - name: Authenticate Firebase CLI
+      env:
+        SERVICE_ACCOUNT_KEY: ${{ inputs.service-account-key }}
+      run: |
+        printf '%s' "$SERVICE_ACCOUNT_KEY" > "$RUNNER_TEMP/firebase-service-account.json"
+        echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/firebase-service-account.json" >> $GITHUB_ENV
       shell: ${{ inputs.shell-type }}

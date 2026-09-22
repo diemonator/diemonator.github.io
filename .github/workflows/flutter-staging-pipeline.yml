@@ -28,15 +28,14 @@ jobs:
       - name: Configure Firebase
         uses: ./.github/actions/configure-firebase
         with:
-          node-version: ${{ matrix.node }}
           firebase-version: ${{ vars.FIREBASE_VERSION }}
+          service-account-key: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           shell-type: bash
 
       - name: Configure FlutterFire for Web
         uses: ./.github/actions/configure-flutterfire
         with:
           platforms: web
-          firebase-token: ${{ secrets.FIREBASE_TOKEN }}
           firebase-project-id: ${{ secrets.FIREBASE_PROJECT_ID }}
           shell-type: bash
 
@@ -55,9 +54,11 @@ jobs:
 
       - name: Build Flutter Web
         run: |
+          # ponytail: staging has no version tag, so the build name comes from pubspec
+          BUILD_VERSION=$(grep '^version:' pubspec.yaml | cut -d' ' -f2 | cut -d'+' -f1)
           flutter build web \
           --build-number=$GITHUB_RUN_NUMBER \
-          --dart-define=BUILD_VERSION=${{ steps.build_number.outputs.build_number }}
+          --dart-define=BUILD_VERSION=$BUILD_VERSION-${GITHUB_SHA::7}
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
@@ -95,15 +96,14 @@ jobs:
       - name: Configure Firebase
         uses: ./.github/actions/configure-firebase
         with:
-          node-version: ${{ matrix.node }}
           firebase-version: ${{ vars.FIREBASE_VERSION }}
+          service-account-key: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           shell-type: bash
 
       - name: Configure FlutterFire for Android
         uses: ./.github/actions/configure-flutterfire
         with:
           platforms: android
-          firebase-token: ${{ secrets.FIREBASE_TOKEN }}
           firebase-project-id: ${{ secrets.FIREBASE_PROJECT_ID }}
           shell-type: bash
 
@@ -114,11 +114,13 @@ jobs:
         run: flutter test
 
       - name: Build Android APK
-        run: | 
+        run: |
+          # ponytail: staging has no version tag, so the build name comes from pubspec
+          BUILD_VERSION=$(grep '^version:' pubspec.yaml | cut -d' ' -f2 | cut -d'+' -f1)
           flutter build apk \
           --flavor ${{ vars.FLAVOR }} \
           --build-number=$GITHUB_RUN_NUMBER \
-          --dart-define=BUILD_VERSION=${{ steps.build_number.outputs.build_number }}
+          --dart-define=BUILD_VERSION=$BUILD_VERSION-${GITHUB_SHA::7}
 
       - name: Upload Build Android APK
         uses: actions/upload-artifact@v4
